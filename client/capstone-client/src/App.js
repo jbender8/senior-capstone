@@ -15,7 +15,7 @@ const Panel = ({site, link}) => {
         {site}
       </Typography>
       <p>
-        <Link href={link}>
+        <Link component="button" href={link} variant="body2">
           {site}
         </Link>
       </p>
