@@ -3,7 +3,16 @@ import './App.css';
 import Home from './Home.js';
 import Search from './Search.js';
 
-// import db, {getAllJobs} from './util/firebase.js';
+import db, {getAllJobs, userQuery} from './util/firebase.js';
+
+console.log(getAllJobs());
+
+console.log(userQuery({
+  salary: '75000',
+  location: 'chicago',
+  skills: ['python'],
+  level: 'junior'
+}));
 
 function App() {
   return(

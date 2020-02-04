@@ -27,15 +27,36 @@ firebase.analytics();
 const db = firebase.firestore();
 
 export const getAllJobs = () => {
+  const jobs = [];
   db.collection('job').get().then(qs => {
     qs.forEach(doc => {
-      console.log(`${doc.id}`);
-      const object = doc.data();
-      for(const prop in object) {
-        console.log(` \t ${prop} = ${object[prop]}`);
-      }
+      jobs.push(doc.data());
     });
   });
+  return jobs;
+}
+
+export const userQuery = ({salary, skills, location, level}) => {
+  let minSalary, maxSalary;
+  if(typeof salary === 'array') {
+    minSalary = salary[0];
+    maxSalary = salary[1];
+  } else {
+    minSalary = salary;
+    maxSalary = '99999999999';
+  }
+
+  const jobs = [];
+  db.collection('job')
+    .where('location', '==', location)
+    .where('salary', '>=', minSalary)
+    .where('salary', '<=', maxSalary)
+    .where('skills', 'array-contains-any', skills)
+    .where('level', '==', level)
+    .get()
+    .then(qs => qs.forEach(doc => jobs.push(doc.data())));
+
+  return jobs;
 }
 
 export default db;
