@@ -5,9 +5,11 @@ import Search from './Search.js';
 import {Vis1} from './Visualizations.js';
 
 
-// import db, {getAllJobs} from './util/firebase.js';
+import {getAllJobs} from './util/firebase.js';
+
 
 function App() {
+  const jobs = getAllJobs();
   return(
     <div>
         <Vis1 />
