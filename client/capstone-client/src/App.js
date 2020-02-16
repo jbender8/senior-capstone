@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Home from './Home.js';
+import Grid from '@material-ui/core/Grid'
 import Search from './Search.js';
 import {Vis1, Vis2} from './Visualizations.js';
 
@@ -32,9 +33,16 @@ function App() {
   
 return(
     <div>
-        <Vis1 data={jobs}/>
-        <Vis2 data={cities}/>
-       <Search />
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Vis1 data={jobs}/>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Vis2 data={cities}/>
+        </Grid>
+      </Grid>
+
+      <Search />
     </div>
   );
 }
