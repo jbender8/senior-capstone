@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Home from './Home.js';
 import Search from './Search.js';
+import {Vis1} from './Visualizations.js';
+
 
 import {getAllJobs, userQuery} from './util/firebase.js';
 
@@ -16,7 +18,10 @@ console.log(userQuery({
 
 function App() {
   return(
-    <Search />
+    <div>
+        <Vis1 />
+       <Search />
+    </div>
   );
 }
 
