@@ -35,53 +35,45 @@ const Search = () => {
         setSkills(newSkill);
     }
 
+    const RenderSkills = ({skills, availableSkills, handleSkills}) => {
+        return (
+            <ToggleButtonGroup value={skills} onChange={handleSkills}>
+                {availableSkills.map((skill, i) => <ToggleButton key={i} value={skill}>{skill}</ToggleButton>)}
+            </ToggleButtonGroup>
+        );
+    }
+
+    const MenuItems = ({items, value, handler}) => {
+        return (
+            <Select value={value} onChange={handler}>
+                {items.map((item, key) => <MenuItem value={item} key={key}>{item}</MenuItem>)}
+            </Select>
+        );
+    }
+
     const availableSkills = ['Data Science', 'Machine Learning', 'R', 'Python'];
-    const locations = ['Chicago', 'San Francisco', 'New York City'];
+    const locations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
     const levels = ['Junior', 'Senior', 'Principal', 'Staff'];
     return (
         <Container maxWidth='xl' align='center'>
             <Grid container alignItems='flex-end' justify='center' spacing={2}>
                 <Grid item>
                     <InputLabel>Location</InputLabel>
-                    <Select
-                        value={location}
-                        onChange={handleLocation}
-                    >
-                        <MenuItem value={locations[0]}>{locations[0]}</MenuItem>
-                        <MenuItem value={locations[1]}>{locations[1]}</MenuItem>
-                        <MenuItem value={locations[2]}>{locations[2]}</MenuItem>
-                    </Select>
+                    <MenuItems items={locations} value={location} handler={handleLocation}/>
                 </Grid>
                 <Grid item>
                     <InputLabel>Level</InputLabel>
-                    <Select
-                        value={level}
-                        onChange={handleLevel}
-                    >
-                        <MenuItem value={levels[0]}>{levels[0]}</MenuItem>
-                        <MenuItem value={levels[1]}>{levels[1]}</MenuItem>
-                        <MenuItem value={levels[2]}>{levels[2]}</MenuItem>
-                        <MenuItem value={levels[3]}>{levels[3]}</MenuItem>
-                    </Select>
+                    <MenuItems items={levels} handler={handleLevel} value={level}/>
                 </Grid>
                 <Grid item>
                     <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
                 </Grid>
                 <Grid item>
-                    <ToggleButtonGroup value={skills} onChange={handleSkills}>
-                        <ToggleButton value={availableSkills[0]}>
-                            {availableSkills[0]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[1]}>
-                            {availableSkills[1]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[2]}>
-                            {availableSkills[2]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[3]}>
-                            {availableSkills[3]}
-                        </ToggleButton>
-                    </ToggleButtonGroup>
+                    <RenderSkills
+                        skills={skills}
+                        availableSkills={availableSkills}
+                        handleSkills={handleSkills}
+                    />
                 </Grid>
             </Grid>
         </Container>

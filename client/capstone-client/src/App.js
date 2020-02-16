@@ -3,7 +3,7 @@ import './App.css';
 import Home from './Home.js';
 import Search from './Search.js';
 
-import db, {getAllJobs, userQuery} from './util/firebase.js';
+import {getAllJobs, userQuery} from './util/firebase.js';
 
 console.log(getAllJobs());
 

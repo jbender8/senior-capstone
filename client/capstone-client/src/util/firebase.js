@@ -1,17 +1,6 @@
 const firebase = require('firebase');
 require('firebase/firestore');
 
-// db.collection('job').add({
-//   level: 'junior',
-//   location: 'chicago',
-//   skills: ['statistics', 'machine learning', 'python'],
-//   title: 'junior machine learning engineer (test)',
-//   website: 'thisjobisfake.com',
-//   salary: '75,000'
-// })
-//   .then(ref => console.log(`Success. Job created. Id=${ref.id}`))
-//   .then(error => console.log(`Error => \n ${error}`));
-
 firebase.initializeApp({
     apiKey: "AIzaSyB2rbtZmbpObKrAWgFNMlLXNHNpQYO6j_I",
     authDomain: "seniorcapstone-46b64.firebaseapp.com",
@@ -25,10 +14,11 @@ firebase.initializeApp({
 
 firebase.analytics();
 const db = firebase.firestore();
+const DB_NAME = 'testJobs';
 
 export const getAllJobs = () => {
   const jobs = [];
-  db.collection('job').get().then(qs => {
+  db.collection(DB_NAME).get().then(qs => {
     qs.forEach(doc => {
       jobs.push(doc.data());
     });
@@ -47,12 +37,11 @@ export const userQuery = ({salary, skills, location, level}) => {
   }
 
   const jobs = [];
-  db.collection('job')
-    .where('location', '==', location)
-    .where('salary', '>=', minSalary)
-    .where('salary', '<=', maxSalary)
-    .where('skills', 'array-contains-any', skills)
-    .where('level', '==', level)
+  db.collection(DB_NAME)
+    .where('JobLocation', '==', location)
+    .where('JobSalary', '>=', minSalary)
+    .where('JobSalary', '<=', maxSalary)
+    .where('JobSkills', 'array-contains-any', skills)
     .get()
     .then(qs => qs.forEach(doc => jobs.push(doc.data())));
 
