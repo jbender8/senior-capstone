@@ -12,55 +12,57 @@ import {
 const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
     return (
         <Grid item>
-            <Card>
-                <CardContent>
-                    <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
-                        <Grid item>
-                            <Typography variant='body1' component='h2'>Title:</Typography>
+            <Container maxWidth='md'>
+                <Card>
+                    <CardContent>
+                        <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
+                            <Grid item>
+                                <Typography variant='body1' component='h2'>Title:</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant='h5' component='h2'>
+                                    {JobTitle}
+                                </Typography>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Typography variant='h5' component='h2'>
-                                {JobTitle}
-                            </Typography>
+                        <Grid container alignItems='center' spacing={2}>
+                            <Grid item>
+                                <Typography variant='body1' component='h2'>Location:</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant='h5' component='h2'>
+                                    {JobLocation}
+                                </Typography>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container alignItems='center' spacing={2}>
-                        <Grid item>
-                            <Typography variant='body1' component='h2'>Location:</Typography>
+                        <Grid container alignItems='center' spacing={2}>
+                            <Grid item>
+                                <Typography variant='body1' component='h2'>Salary:</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant='h5' component='h2'>
+                                    {JobSalary + "$"}
+                                </Typography>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Typography variant='h5' component='h2'>
-                                {JobLocation}
-                            </Typography>
+                        <Grid container alignItems='center' spacing={2}>
+                            <Grid item>
+                                <Typography variant='body1' component='h2'>Skills:</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant='h5' component='h2'>
+                                    {'[ ' + JobSkills.reduce((a, b) => a + ', ' + b) + ' ]'}
+                                </Typography>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container alignItems='center' spacing={2}>
-                        <Grid item>
-                            <Typography variant='body1' component='h2'>Salary:</Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant='h5' component='h2'>
-                                {JobSalary + "$"}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container alignItems='center' spacing={2}>
-                        <Grid item>
-                            <Typography variant='body1' component='h2'>Skills:</Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant='h5' component='h2'>
-                                {'[ ' + JobSkills.reduce((a, b) => a + ', ' + b) + ' ]'}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-                <CardActions>
-                    <Button size='small'>
-                        Link to Job
-                    </Button>
-                </CardActions>
-            </Card>
+                    </CardContent>
+                    <CardActions>
+                        <Button size='small'>
+                            Link to Job
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Container>
         </Grid>
     );
 }
