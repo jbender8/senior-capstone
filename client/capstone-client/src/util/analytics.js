@@ -34,7 +34,7 @@ analytics.jobTitlesByAveSalary = data => {
     }
     console.log(titles)
     for(const title of Object.keys(titles)) {
-        titles[title] = titles[title].reduce((a, b) => a + b, 0) / titles[title].length;
+        titles[title] = titles[title].reduce((a, b) => parseInt(a) + parseInt(b), 0) / titles[title].length;
         titleObjects.push({
             title,
             salary: titles[title]
