@@ -6,7 +6,8 @@ import {
     InputLabel,
     TextField,
     Grid,
-    Input
+    Input,
+    Box
 }
 from '@material-ui/core';
 import {
@@ -33,22 +34,6 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
         setSkills(event.target.value);
     }
 
-    const RenderSkills = ({skills, availableSkills, handleSkills}) => {
-        return (
-            <ToggleButtonGroup value={skills} onChange={handleSkills}>
-                {availableSkills.map((skill, i) => <ToggleButton key={i} value={skill}>{skill}</ToggleButton>)}
-            </ToggleButtonGroup>
-        );
-    }
-
-    const MenuItems = ({items, value, handler}) => {
-        return (
-            <Select value={value} onChange={handler}>
-                {items.map((item, key) => <MenuItem value={item} key={key}>{item}</MenuItem>)}
-            </Select>
-        );
-    }
-
     const Chips = ({values, value, handleValue, label}) => {
         return (
             <React.Fragment>
@@ -68,30 +53,27 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
         );
     }
 
-    // <Grid item>
-    //                 <InputLabel>Level</InputLabel>
-    //                 <MenuItems items={levels} handler={handleLevel} value={level}/>
-    //             </Grid>
-
     const availableSkills = ['Data Science', 'Machine Learning', 'R', 'Python'];
-    const locationss = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
+    const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
     const levels = ['Junior', 'Senior', 'Principal', 'Staff'];
     return (
-        <Container maxWidth='xl' align='center'>
-            <Grid container alignItems='flex-end' justify='center' spacing={2}>
-                <Grid item>
-                    <Chips values={locationss} label="Locations" value={locations} handleValue={handlelocations} />
+        <Box borderTop={0.5} marginTop={1} paddingTop={2}>
+            <Container maxWidth='xl' align='center'>
+                <Grid container alignItems='flex-end' justify='center' spacing={2}>
+                    <Grid item>
+                        <Chips values={availableLocations} label="Locations" value={locations} handleValue={handlelocations} />
+                    </Grid>
+                    
+                    <Grid item>
+                        <InputLabel>Salary</InputLabel>
+                        <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
+                    </Grid>
+                    <Grid item>
+                        <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
+                    </Grid>
                 </Grid>
-                
-                <Grid item>
-                    <InputLabel>Salary</InputLabel>
-                    <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
-                </Grid>
-                <Grid item>
-                    <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </Box>
     );
 }
 

@@ -14,9 +14,9 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
         <Grid item>
             <Card>
                 <CardContent>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
                         <Grid item>
-                            <Typography variant='bod2' component='h2'>Title:</Typography>
+                            <Typography variant='body1' component='h2'>Title:</Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='h5' component='h2'>
@@ -24,9 +24,9 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container alignItems='center' spacing={2}>
                         <Grid item>
-                            <Typography variant='bod2' component='h2'>Location:</Typography>
+                            <Typography variant='body1' component='h2'>Location:</Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='h5' component='h2'>
@@ -34,9 +34,9 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container alignItems='center' spacing={2}>
                         <Grid item>
-                            <Typography variant='bod2' component='h2'>Salary:</Typography>
+                            <Typography variant='body1' component='h2'>Salary:</Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='h5' component='h2'>
@@ -44,17 +44,16 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container alignItems='center' spacing={2}>
                         <Grid item>
-                            <Typography variant='bod2' component='h2'>Skills:</Typography>
+                            <Typography variant='body1' component='h2'>Skills:</Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='h5' component='h2'>
-                                {JobSkills.reduce((a, b) => a + ', ' + b)}
+                                {'[ ' + JobSkills.reduce((a, b) => a + ', ' + b) + ' ]'}
                             </Typography>
                         </Grid>
                     </Grid>
-                    
                 </CardContent>
                 <CardActions>
                     <Button size='small'>
