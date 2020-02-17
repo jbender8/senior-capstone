@@ -6,6 +6,7 @@ import {
     InputLabel,
     TextField,
     Grid,
+    Input
 }
 from '@material-ui/core';
 import {
@@ -13,11 +14,11 @@ import {
     ToggleButton
 } from '@material-ui/lab';
 
-const Search = ({skills, setSkills, salary, setSalary, location, setLocation}) => {
+const Search = ({skills, setSkills, salary, setSalary, locations, setlocations}) => {
     const [level, setLevel] = React.useState("Junior");
 
-    const handleLocation = event => {
-        setLocation(event.target.value);
+    const handlelocations = event => {
+        setlocations(event.target.value);
     }
 
     const handleSalary = event => {
@@ -28,8 +29,8 @@ const Search = ({skills, setSkills, salary, setSalary, location, setLocation}) =
         setLevel(event.target.value);
     }
 
-    const handleSkills = (event, newSkill) => {
-        setSkills(newSkill);
+    const handleSkills = (event) => {
+        setSkills(event.target.value);
     }
 
     const RenderSkills = ({skills, availableSkills, handleSkills}) => {
@@ -48,29 +49,45 @@ const Search = ({skills, setSkills, salary, setSalary, location, setLocation}) =
         );
     }
 
+    const Chips = ({values, value, handleValue, label}) => {
+        return (
+            <React.Fragment>
+                <InputLabel>{label}</InputLabel>
+                <Select
+                    multiple
+                    value={value}
+                    onChange={handleValue}
+                    input={<Input/>}
+
+                >
+                    {values.map(v => {
+                        return <MenuItem key={v} value={v}>{v}</MenuItem>
+                    })}
+                </Select>
+            </React.Fragment>
+        );
+    }
+
+    // <Grid item>
+    //                 <InputLabel>Level</InputLabel>
+    //                 <MenuItems items={levels} handler={handleLevel} value={level}/>
+    //             </Grid>
+
     const availableSkills = ['Data Science', 'Machine Learning', 'R', 'Python'];
-    const locations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
+    const locationss = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
     const levels = ['Junior', 'Senior', 'Principal', 'Staff'];
     return (
         <Container maxWidth='xl' align='center'>
             <Grid container alignItems='flex-end' justify='center' spacing={2}>
                 <Grid item>
-                    <InputLabel>Location</InputLabel>
-                    <MenuItems items={locations} value={location} handler={handleLocation}/>
+                    <Chips values={locationss} label="Locations" value={locations} handleValue={handlelocations} />
                 </Grid>
-                <Grid item>
-                    <InputLabel>Level</InputLabel>
-                    <MenuItems items={levels} handler={handleLevel} value={level}/>
-                </Grid>
+                
                 <Grid item>
                     <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
                 </Grid>
                 <Grid item>
-                    <RenderSkills
-                        skills={skills}
-                        availableSkills={availableSkills}
-                        handleSkills={handleSkills}
-                    />
+                    <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                 </Grid>
             </Grid>
         </Container>

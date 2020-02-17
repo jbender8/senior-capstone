@@ -26,27 +26,38 @@ export const getAllJobs = () => {
   return jobs;
 }
 
-export const userQuery = ({salary, skills, location, data, setData}) => {
-  let minSalary, maxSalary;
-  if(typeof salary === 'array') {
-    minSalary = salary[0];
-    maxSalary = salary[1];
-  } else {
-    minSalary = salary;
-    maxSalary = '99999999999';
+// export const userQuery = ({salary, skills, locations, data, setData}) => {
+//   skills = skills.map(skill => skill.toLowerCase());
+//   locations = locations.map(l => l.toLowerCase());
+//   db.collection(DB_NAME).get().then(qs => {
+//     qs.forEach(doc => {
+//       const job = doc.data();
+//       if(job.JobSalary >= salary && job.JobLocation in locations ) setData(prev => [...prev, job]);
+//     });
+//   });
+// }
+
+const contains = (a, b) => {
+  for(const e1 of a) {
+    for(const e2 of b) {
+      if(e1 == e2) return true;
+    }
   }
-  
+  return false;
+}
+
+export const userQuery = ({salary, skills, locations, data, setData}) => {
   skills = skills.map(skill => skill.toLowerCase());
-  location = location.toLowerCase();
-
+  locations = locations.map(l => l.toLowerCase());
   db.collection(DB_NAME)
-    .where('JobLocation', '==', location)
-    .where('JobSalary', '>=', minSalary)
-    .where('JobSalary', '<=', maxSalary)
-    .where('JobSkills', 'array-contains-any', skills)
-    .get()
-    .then(qs => qs.forEach(doc => setData([...data, doc.data()]) ));
-
+  .where('JobLocation', 'in', locations)
+  .where('JobSalary', '>=', salary)
+  .get()
+  .then(qs => qs.forEach(doc => {
+    const job = doc.data();
+    console.log(skills, job.JobSkills)
+    if(contains(skills, job.JobSkills)) setData(prev => [...prev, job]);
+  }));
 }
 
 
@@ -54,7 +65,7 @@ export const createFakeJobs = numJobs => {
   const randomLocation = () => ['chicago', 'san francisco', 'new york city'][Math.floor(Math.random() * 3)];
   for(; numJobs > 0; numJobs--) {
     db.collection(DB_NAME).add({
-      JobSalary: (Math.random() * 75000) + 50000,
+      JobSalary: "" + Math.floor((Math.random() * 75000) + 50000),
       JobSkills: ['python', 'r', 'sql'],
       JobTitle: Math.random() * 100 > 49 ? 'software engineer' : 'data scientist',
       JobLocation: randomLocation()

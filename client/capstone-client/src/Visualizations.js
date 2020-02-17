@@ -10,6 +10,8 @@ export const Vis1 = ({data}) => {
       <BarChart width={550} height={250} data={data}>
         <XAxis dataKey="title" />
 		    <YAxis />
+        <Tooltip />
+        <Legend />
 		    <Bar dataKey="salary" fill="#8884d8" />
 	    </BarChart>
     );

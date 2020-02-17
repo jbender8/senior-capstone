@@ -3,25 +3,28 @@ import './App.css';
 import Home from './Home.js';
 import {
   Grid,
-  Button
+  Button,
+  Typography
 } from '@material-ui/core'
 import Search from './Search.js';
 import {Vis1, Vis2} from './Visualizations.js';
 import {getAllJobs, userQuery, createFakeJobs} from './util/firebase.js';
 import QueryResults from './QueryResults.js';
+import analytics from './util/analytics.js';
 
-// createFakeJobs(10);
+// createFakeJobs(20);
 console.log(getAllJobs());
 
 function App() {
   const [data, setData] = React.useState([]);
-  const [location, setLocation] = React.useState('Chicago');
+  const [locations, setlocations] = React.useState(['Chicago', 'New York City']);
   const [salary, setSalary] = React.useState("75000");
-  const [skills, setSkills] = React.useState(() => []);
+  const [skills, setSkills] = React.useState(['Python']);
 
   const submitQuery = () => {
+    setData(prev => []);
     userQuery({
-      location,
+      locations,
       salary,
       skills,
       data,
@@ -35,28 +38,34 @@ function App() {
   jobs.push({title : 'Software Engineer', salary : '81500'});
   jobs.push({title : 'Data Scientist', salary : '79200'});
 
-  const cities = [
-    { name: 'Chicago', value: 178 }, { name: 'Houston', value: 129 },
-    { name: 'New York City', value: 203 }, { name: 'San Francisco', value: 247 },
-  ];
+  // const cities = [
+  //   { name: 'Chicago', value: 178 }, { name: 'Houston', value: 129 },
+  //   { name: 'New York City', value: 203 }, { name: 'San Francisco', value: 247 },
+  // ];
+
+  const citiesByFreq = analytics.citiesByFreq(data);
+  const titlesByAve = analytics.jobTitlesByAveSalary(data);
   
 return(
     <div>
+      <Typography variant='h2' align='center'>
+        Job Search
+      </Typography>
       <Grid container spacing={3} alignItems='center' alignContent='center' justify='center'>
         <Grid item>
-          <Vis1 data={jobs}/>
+          <Vis1 data={titlesByAve}/>
         </Grid>
         <Grid item>
-          <Vis2 data={cities}/>
+          <Vis2 data={citiesByFreq}/>
         </Grid>
       </Grid>
 
       <Grid container nowrap direction='column' alignContent='center' justify='center' alignItems='center' spacing={3}>
         <Grid item>
-          <Search {...{location, setLocation, setSalary, salary, setSkills, skills}}/>
+          <Search {...{locations, setlocations, setSalary, salary, setSkills, skills}}/>
         </Grid>
         <Grid item>
-          <Button variant='contained' onClick={submitQuery}>Submit</Button>
+          <Button variant='contained' color='primary' onClick={submitQuery}>Submit</Button>
         </Grid>
         <Grid item>
           
