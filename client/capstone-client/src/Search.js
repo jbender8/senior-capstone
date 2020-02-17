@@ -84,6 +84,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
                 </Grid>
                 
                 <Grid item>
+                    <InputLabel>Salary</InputLabel>
                     <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
                 </Grid>
                 <Grid item>

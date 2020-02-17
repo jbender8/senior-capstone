@@ -6,10 +6,11 @@ import {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export const Vis1 = ({data}) => {
+  if(data.length === 0) return null;
     return (
       <BarChart width={550} height={250} data={data}>
         <XAxis dataKey="title" />
-		    <YAxis />
+		    <YAxis unit="$"/>
         <Tooltip />
         <Legend />
 		    <Bar dataKey="salary" fill="#8884d8" />
@@ -18,6 +19,7 @@ export const Vis1 = ({data}) => {
 }
 
 export const Vis2 = ({data}) => {
+  if(data.length === 0) return null;
     return (
         <PieChart width={250} height={250}>
           <Pie data={data} dataKey="value" outerRadius={60} fill="#8884d8" label>
