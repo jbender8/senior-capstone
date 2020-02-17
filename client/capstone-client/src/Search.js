@@ -13,10 +13,7 @@ import {
     ToggleButton
 } from '@material-ui/lab';
 
-const Search = () => {
-    const [location, setLocation] = React.useState('Chicago');
-    const [salary, setSalary] = React.useState("75000");
-    const [skills, setSkills] = React.useState(() => []);
+const Search = ({skills, setSkills, salary, setSalary, location, setLocation}) => {
     const [level, setLevel] = React.useState("Junior");
 
     const handleLocation = event => {

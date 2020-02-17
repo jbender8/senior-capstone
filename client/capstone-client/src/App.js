@@ -1,21 +1,34 @@
 import React from 'react';
 import './App.css';
 import Home from './Home.js';
-import Grid from '@material-ui/core/Grid'
+import {
+  Grid,
+  Button
+} from '@material-ui/core'
 import Search from './Search.js';
 import {Vis1, Vis2} from './Visualizations.js';
-import {getAllJobs, userQuery} from './util/firebase.js';
+import {getAllJobs, userQuery, createFakeJobs} from './util/firebase.js';
+import QueryResults from './QueryResults.js';
 
+// createFakeJobs(10);
 console.log(getAllJobs());
 
-console.log(userQuery({
-  salary: '75000',
-  location: 'chicago',
-  skills: ['Python'],
-  level: 'junior'
-}));
-
 function App() {
+  const [data, setData] = React.useState([]);
+  const [location, setLocation] = React.useState('Chicago');
+  const [salary, setSalary] = React.useState("75000");
+  const [skills, setSkills] = React.useState(() => []);
+
+  const submitQuery = () => {
+    userQuery({
+      location,
+      salary,
+      skills,
+      data,
+      setData
+    });
+  }
+
   const jobs = [];
   jobs.push({title : 'Data Analyst', salary : '73000'});
   jobs.push({title : 'QA Analyst', salary : '68000'});
@@ -38,7 +51,18 @@ return(
         </Grid>
       </Grid>
 
-      <Search />
+      <Grid container nowrap direction='column' alignContent='center' justify='center' alignItems='center' spacing={3}>
+        <Grid item>
+          <Search {...{location, setLocation, setSalary, salary, setSkills, skills}}/>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' onClick={submitQuery}>Submit</Button>
+        </Grid>
+        <Grid item>
+          
+        </Grid>
+      </Grid>
+      <QueryResults results={data}/>
     </div>
   );
 }

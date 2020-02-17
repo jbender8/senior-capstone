@@ -14,7 +14,7 @@ firebase.initializeApp({
 
 firebase.analytics();
 const db = firebase.firestore();
-const DB_NAME = 'testJobs';
+const DB_NAME = 'RealFakeData';
 
 export const getAllJobs = () => {
   const jobs = [];
@@ -26,7 +26,7 @@ export const getAllJobs = () => {
   return jobs;
 }
 
-export const userQuery = ({salary, skills, location, level}) => {
+export const userQuery = ({salary, skills, location, data, setData}) => {
   let minSalary, maxSalary;
   if(typeof salary === 'array') {
     minSalary = salary[0];
@@ -35,17 +35,33 @@ export const userQuery = ({salary, skills, location, level}) => {
     minSalary = salary;
     maxSalary = '99999999999';
   }
+  
+  skills = skills.map(skill => skill.toLowerCase());
+  location = location.toLowerCase();
 
-  const jobs = [];
   db.collection(DB_NAME)
     .where('JobLocation', '==', location)
     .where('JobSalary', '>=', minSalary)
     .where('JobSalary', '<=', maxSalary)
     .where('JobSkills', 'array-contains-any', skills)
     .get()
-    .then(qs => qs.forEach(doc => jobs.push(doc.data())));
+    .then(qs => qs.forEach(doc => setData([...data, doc.data()]) ));
 
-  return jobs;
+}
+
+
+export const createFakeJobs = numJobs => {
+  const randomLocation = () => ['chicago', 'san francisco', 'new york city'][Math.floor(Math.random() * 3)];
+  for(; numJobs > 0; numJobs--) {
+    db.collection(DB_NAME).add({
+      JobSalary: (Math.random() * 75000) + 50000,
+      JobSkills: ['python', 'r', 'sql'],
+      JobTitle: Math.random() * 100 > 49 ? 'software engineer' : 'data scientist',
+      JobLocation: randomLocation()
+    })
+    .then(docRef => console.log(docRef.id))
+    .then(error => console.log(error));
+  }
 }
 
 export default db;
