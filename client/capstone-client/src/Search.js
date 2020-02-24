@@ -53,17 +53,17 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
         );
     }
 
-    const availableSkills = ['Data Science', 'Machine Learning', 'R', 'Python'];
-    const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houghston'];
-    const levels = ['Junior', 'Senior', 'Principal', 'Staff'];
+    const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'spark', 'Java', 'SAS', 'tableau', 'hive', 'Scala', 'AWS', 'c++', 'matlab', 'tensorflow', 'C', 'excel', 'NoSql', 'Linux', 'azure', 'sclkit-learn', 'SPSS', 'pandas', 'JavaScript', 'Perl', 'C#', 'numpy', 'keras', 'git', 'docker', 'MySQL', 'hbase', 'mongodb', 'Cassandra', 'pytorch', 'd3', 'caffe'];
+    const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
+    const levels = ['artificial intelligence', 'deep learning', 'machine learning', 'data science'];
     return (
+        <div className="page-serch">
         <Box borderTop={0.5} marginTop={1} paddingTop={2}>
             <Container maxWidth='xl' align='center'>
                 <Grid container alignItems='flex-end' justify='center' spacing={2}>
                     <Grid item>
                         <Chips values={availableLocations} label="Locations" value={locations} handleValue={handlelocations} />
                     </Grid>
-                    
                     <Grid item>
                         <InputLabel>Salary</InputLabel>
                         <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
@@ -71,9 +71,13 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
                     <Grid item>
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                     </Grid>
+                    <Grid item>
+                        <Chips values={levels} label="Titles" value={levels} handleValue={handleLevel} />
+                    </Grid>
                 </Grid>
             </Container>
         </Box>
+        </div>
     );
 }
 

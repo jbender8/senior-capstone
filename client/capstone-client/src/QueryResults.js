@@ -71,10 +71,11 @@ const QueryResults = ({results}) => {
     if(results.length === 0) return null;
     return (
         <Container maxWidth='lg'>
+            <div className="page-query">
             <Grid container spacing={2} direction='column'>
                 {results.map((result, i) => <Result {...result} key={i}/>)}
             </Grid>
-            
+            </div>
         </Container>
     );
 }

@@ -7,6 +7,8 @@ import {
   Typography
 } from '@material-ui/core'
 import Search from './Search.js';
+import Header from './header';
+import Footer from './footer';
 import {Vis1, Vis2} from './Visualizations.js';
 import {getAllJobs, userQuery, createFakeJobs} from './util/firebase.js';
 import QueryResults from './QueryResults.js';
@@ -48,9 +50,7 @@ function App() {
   
 return(
     <div>
-      <Typography variant='h2' align='center'>
-        Job Search
-      </Typography>
+      <Header />
       <Grid container spacing={3} alignItems='center' alignContent='center' justify='center'>
         <Grid item>
           <Vis1 data={titlesByAve}/>
@@ -72,6 +72,7 @@ return(
         </Grid>
       </Grid>
       <QueryResults results={data}/>
+      <Footer />
     </div>
   );
 }
