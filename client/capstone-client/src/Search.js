@@ -52,9 +52,9 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
         );
     }
 
-    const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'spark', 'Java', 'SAS', 'tableau', 'hive', 'Scala', 'AWS', 'c++', 'matlab', 'tensorflow', 'C', 'excel', 'NoSql', 'Linux', 'azure', 'sclkit-learn', 'SPSS', 'pandas', 'JavaScript', 'Perl', 'C#', 'numpy', 'keras', 'git', 'docker', 'MySQL', 'hbase', 'mongodb', 'Cassandra', 'pytorch', 'd3', 'caffe'];
+    const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'Spark', 'Java', 'SAS', 'Tableau', 'Hive', 'Scala', 'AWS', 'C++', 'MATLAB', 'TensorFlow', 'C', 'Excel', 'NoSQL', 'Linux', 'Azure', 'sclkit-learn', 'SPSS', 'Pandas', 'JavaScript', 'Perl', 'C#', 'NumPy', 'Keras', 'Git', 'Docker', 'MySQL', 'HBase', 'MongoDB', 'Cassandra', 'PyTorch', 'D3', 'Caffe'];
     const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
-    const availableFeilds = ['Artificial Intelligence', 'deep learning', 'machine learning', 'data science'];
+    const availableFeilds = ['Artificial Intelligence', 'Deep Learning', 'Machine Learning', 'Data Science'];
     return (
         <div className="page-serch">
         <Box borderTop={0.5} marginTop={1} paddingTop={2}>
