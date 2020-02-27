@@ -15,8 +15,7 @@ import {
     ToggleButton
 } from '@material-ui/lab';
 
-const Search = ({skills, setSkills, salary, setSalary, locations, setlocations}) => {
-    const [level, setLevel] = React.useState("Junior");
+const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, feild, setFeild}) => {
 
     const handlelocations = event => {
         setlocations(event.target.value);
@@ -26,8 +25,8 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
         setSalary(event.target.value);
     }
 
-    const handleLevel = event => {
-        setLevel(event.target.value);
+    const handleFeild = event => {
+        setFeild(event.target.value);
     }
 
     const handleSkills = (event) => {
@@ -55,7 +54,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
 
     const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'spark', 'Java', 'SAS', 'tableau', 'hive', 'Scala', 'AWS', 'c++', 'matlab', 'tensorflow', 'C', 'excel', 'NoSql', 'Linux', 'azure', 'sclkit-learn', 'SPSS', 'pandas', 'JavaScript', 'Perl', 'C#', 'numpy', 'keras', 'git', 'docker', 'MySQL', 'hbase', 'mongodb', 'Cassandra', 'pytorch', 'd3', 'caffe'];
     const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
-    const levels = ['artificial intelligence', 'deep learning', 'machine learning', 'data science'];
+    const availableFeilds = ['Artificial Intelligence', 'deep learning', 'machine learning', 'data science'];
     return (
         <div className="page-serch">
         <Box borderTop={0.5} marginTop={1} paddingTop={2}>
@@ -72,7 +71,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations})
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                     </Grid>
                     <Grid item>
-                        <Chips values={levels} label="Titles" value={levels} handleValue={handleLevel} />
+                        <Chips values={availableFeilds} label="Fields" value={feild} handleValue={handleFeild} />
                     </Grid>
                 </Grid>
             </Container>

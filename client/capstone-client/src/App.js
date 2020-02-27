@@ -22,6 +22,8 @@ function App() {
   const [locations, setlocations] = React.useState(['Chicago', 'New York City']);
   const [salary, setSalary] = React.useState("75000");
   const [skills, setSkills] = React.useState(['Python']);
+  const [feild, setFeild] = React.useState(["Artificial Intelligence"]);
+
 
   const submitQuery = () => {
     setData(prev => []);
@@ -62,7 +64,7 @@ return(
 
       <Grid container nowrap direction='column' alignContent='center' justify='center' alignItems='center' spacing={3}>
         <Grid item>
-          <Search {...{locations, setlocations, setSalary, salary, setSkills, skills}}/>
+          <Search {...{locations, setlocations, setSalary, salary, setSkills, skills, feild, setFeild}}/>
         </Grid>
         <Grid item>
           <Button variant='contained' color='primary' onClick={submitQuery}>Submit</Button>
