@@ -14,26 +14,26 @@ now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 ## URLs for queries
 queries =   [
-            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=deep%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=machine%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=data%20science&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=artificial%20intelligence&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=deep%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=machine%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=data%20science&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=artificial%20intelligence&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=deep%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=machine%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=data%20science&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=deep%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=machine%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=data%20science&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=deep%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=machine%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
-            "https://www.dice.com/jobs?q=data%20science&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en"
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=50&radiusUnit=mi&page=1&pageSize=20&language=en"
             ]
 cities = ['chicago', 'san francisco', 'new york', 'seattle', 'houston']
 
@@ -44,6 +44,14 @@ targetSkills = ['python','r', 'sql', 'hadoop', 'spark', 'java', 'sas', 'tableau'
             'mysql', 'hbase', 'mongodb', 'cassandra', 'pytorch', 'd3', 'caffe',
             'data science', 'deep learning', 'machine learning',
             'artificial intelligence']
+
+avg = {
+        'chicago': '66580',
+        'san francisco': '103913',
+        'new york': '79096',
+        'seattle': '85000',
+        'houston': '61013'
+        }
 
 
 class DiceScraper():
@@ -100,14 +108,24 @@ class DiceScraper():
             
         if ( pg.find('li', class_ = 'location' ) != None):
             loc = pg.find('li', class_ = 'location').text.strip().lower()
-            cf = False
-            for c in cities:
-                if (c in loc):
-                    cf = True
-                    loc = c
-                    break
-            if (cf == False):
-                return
+            if loc[-2:] == 'il':
+                loc = 'chicago'
+            elif loc[-2:] == 'ca':
+                loc = 'san francisco'
+            elif loc[-2:] == 'ny':
+                loc = 'new york'
+            elif loc[-2:] == 'wa':
+                loc = 'seattle'
+            elif loc[-2:] == 'tx':
+                loc = 'houston'
+##            cf = False
+##            for c in cities:
+##                if (c in loc):
+##                    cf = True
+##                    loc = c
+##                    break
+##            if (cf == False):
+##                return
 
         try:
             s = pg.find('span', class_ = 'icon-bank-note icons')
@@ -117,6 +135,16 @@ class DiceScraper():
                 sal = s.text.strip()
                 try:
                     r = re.findall('\$[\d{0,9)]+[,[\d{0,9}]+]*',sal)
+                    sal = int(r[0].strip('$').replace(',', ''))
+                    if ( sal < 1000):
+                        sal = str(sal * 2080)
+                    sal = str(sal)
+                except:
+                    pass
+            if (sal == ''):
+                try:
+                    desc = pg.find(id='jobdescSec').text
+                    r = re.findall('\$[\d{0,9)]+[,[\d{0,9}]+]*', desc)
                     sal = int(r[0].strip('$').replace(',', ''))
                     if ( sal < 1000):
                         sal = str(sal * 2080)
@@ -137,7 +165,7 @@ class DiceScraper():
                 return
             
         if not sal.isnumeric():
-            return
+            sal = avg[loc]
         
         data = {"JobTitle": title,
                 "JobLocation": loc,
