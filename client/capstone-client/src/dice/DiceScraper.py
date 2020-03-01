@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 import firebase_admin
 from firebase_admin import credentials
@@ -8,22 +9,42 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+
+## URLs for queries
 queries =   [
-            "https://www.dice.com/jobs?q=software&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en"
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Chicago,%20IL,%20USA&latitude=41.8781136&longitude=-87.6297982&countryCode=US&locationPrecision=City&adminDistrictCode=IL&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=San%20Francisco,%20CA,%20USA&latitude=37.7749295&longitude=-122.4194155&countryCode=US&locationPrecision=City&adminDistrictCode=CA&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=New%20York,%20NY,%20USA&latitude=40.7127753&longitude=-74.0059728&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Seattle,%20WA,%20USA&latitude=47.6062095&longitude=-122.3320708&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=artificial%20intelligence&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=deep%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=machine%20learning&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en",
+            "https://www.dice.com/jobs?q=data%20science&location=Houston,%20TX,%20USA&latitude=29.7604267&longitude=-95.3698028&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&language=en"
             ]
-cities = ['chicago', 'san francisco', 'new york city', 'seattle', 'houston']
+cities = ['chicago', 'san francisco', 'new york', 'seattle', 'houston']
 
 targetSkills = ['python','r', 'sql', 'hadoop', 'spark', 'java', 'sas', 'tableau',
-          'hive', 'scala', 'aws', 'c++', 'matlab', 'tensorflow', 'c', 'excel',
-          'nosql', 'linux', 'azure', 'sclkit-learn', 'spss', 'pandas',
-          'javascript', 'perl', 'c#', 'numpy', 'keras', 'git', 'docker',
-          'mysql', 'hbase', 'mongodb', 'cassandra', 'pytorch', 'd3', 'caffe']
+            'hive', 'scala', 'aws', 'c++', 'matlab', 'tensorflow', 'c', 'excel',
+            'nosql', 'linux', 'azure', 'sclkit-learn', 'spss', 'pandas',
+            'javascript', 'perl', 'c#', 'numpy', 'keras', 'git', 'docker',
+            'mysql', 'hbase', 'mongodb', 'cassandra', 'pytorch', 'd3', 'caffe',
+            'data science', 'deep learning', 'machine learning',
+            'artificial intelligence']
 
-## Jobs - artificial intelligence, deep learning, machine learning,
-## data science
 
 class DiceScraper():
 
@@ -53,7 +74,7 @@ class DiceScraper():
         '''push scraped data to Firestore'''
         
         docId = str(now) + ' Dice{0:0>4}'.format(self.count)
-        doc = self.fs.document('diceTest/' + docId)
+        doc = self.fs.document('dice/' + docId)
         doc.create(data)
 
     def scrape(self, link):
@@ -78,7 +99,15 @@ class DiceScraper():
             title = pg.find('h1', class_ = 'jobTitle').text.strip()
             
         if ( pg.find('li', class_ = 'location' ) != None):
-            loc = pg.find('li', class_ = 'location').text.strip()
+            loc = pg.find('li', class_ = 'location').text.strip().lower()
+            cf = False
+            for c in cities:
+                if (c in loc):
+                    cf = True
+                    loc = c
+                    break
+            if (cf == False):
+                return
 
         try:
             s = pg.find('span', class_ = 'icon-bank-note icons')
@@ -86,17 +115,29 @@ class DiceScraper():
             s = s.findNextSibling()
             if ( s != None ):
                 sal = s.text.strip()
+                try:
+                    r = re.findall('\$[\d{0,9)]+[,[\d{0,9}]+]*',sal)
+                    sal = int(r[0].strip('$').replace(',', ''))
+                    if ( sal < 1000):
+                        sal = str(sal * 2080)
+                    sal = str(sal)
+                except:
+                    pass
         except:
             return
             
         if ( pg.find('input', id = 'estSkillText') != None ):
-            skills = pg.find('input', id = 'estSkillText')['value'].split(', ')
+            sk = pg.find('input', id = 'estSkillText')['value'].split(', ')
             for i in range(0, len(skills)):
-                skills[i] = skills[i].strip()
-
-        if sal == "":
-            sal = "$placeholder"
-            ## https://www.guru99.com/python-regular-expressions-complete-tutorial.html
+                sk[i] = sk[i].strip().lower()
+            for skill in sk:
+                if ( skill in targetSkills ):
+                    skills.append(skill)
+            if (len(skills) == 0):
+                return
+            
+        if not sal.isnumeric():
+            return
         
         data = {"JobTitle": title,
                 "JobLocation": loc,
@@ -105,6 +146,7 @@ class DiceScraper():
                 "JobWebsite": "https://www.dice.com/",
                 "JobLink": link}
         self.count += 1
+        ##print(data)
         self.fsPush(data)
 
     def findJobs(self, link):
@@ -122,7 +164,7 @@ class DiceScraper():
         xEnd = ']/div/div[1]/div/div[2]/div[1]/h5/a'
 
         for x in range (0, pgs):
-            print("page " + str(x + 1))
+            ##print("page " + str(x + 1))
             for i in range (1, 21):
                 try:
                     j = self.driver.find_element_by_xpath(xStart + str(i) + xEnd).get_attribute('href')
