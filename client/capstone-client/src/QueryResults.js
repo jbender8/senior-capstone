@@ -9,6 +9,8 @@ import {
     Grid
 } from '@material-ui/core';
 
+var inputSkillsList;
+
 const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
     return (
         <Grid item>
@@ -50,9 +52,8 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
                                 <Typography variant='body1' component='h2'>Skills:</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='h5' component='h2'>
-                                    {'[ ' + JobSkills.reduce((a, b) => a + ', ' + b) + ' ]'}
-                                </Typography>
+                                <JobSkill results={JobSkills}>
+                                </JobSkill> 
                             </Grid>
                         </Grid>
                     </CardContent>
@@ -67,7 +68,34 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
     );
 }
 
-const QueryResults = ({results}) => {
+
+const JobSkill = ({results}) => {
+    console.log(inputSkillsList);
+    if(results.length === 0) return null;
+        return (results.map((result, i) => {
+            if(inputSkillsList.includes(result))
+                return (<Typography variant='h5' style={{color : 'green'}} component='h2' {...result} key={i}>{result}</Typography>)
+            return (<Typography variant='h5' style={{color : 'red'}} component='h2' {...result} key={i}>{result}</Typography>)
+        }));
+}
+
+// const ColoredCard = ({results}) => {
+//     console.log(inputSkillsList);
+//     if(results.length === 0) return null;
+//         return (results.map((result, i) => {
+//             if(inputSkillsList.includes(result))
+//                 return (<Typography variant='h5' style={{color : 'green'}} component='h2' {...result} key={i}>{result}</Typography>)
+//             return (<Typography variant='h5' style={{color : 'red'}} component='h2' {...result} key={i}>{result}</Typography>)
+//         }));
+// }
+
+
+const QueryResults = ({results, inputSkills}) => {
+    console.log(inputSkills);
+    inputSkillsList = inputSkills.map((item) => {
+        return item.toLowerCase();
+    });
+
     if(results.length === 0) return null;
     return (
         <Container maxWidth='lg'>

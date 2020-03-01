@@ -36,11 +36,6 @@ function App() {
     });
   }
 
-  const jobs = [];
-  jobs.push({title : 'Data Analyst', salary : '73000'});
-  jobs.push({title : 'QA Analyst', salary : '68000'});
-  jobs.push({title : 'Software Engineer', salary : '81500'});
-  jobs.push({title : 'Data Scientist', salary : '79200'});
 
   // const cities = [
   //   { name: 'Chicago', value: 178 }, { name: 'Houston', value: 129 },
@@ -73,10 +68,16 @@ return(
           
         </Grid>
       </Grid>
-      <QueryResults results={data}/>
+      <QueryResults results={data} inputSkills={skills}/>
       <Footer />
     </div>
   );
 }
+
+
+export function demoOnClick(e) {
+	alert(e.name);
+}
+ 
 
 export default App;
