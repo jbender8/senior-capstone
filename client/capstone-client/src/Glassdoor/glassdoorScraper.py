@@ -139,18 +139,21 @@ class GlassdoorScraper:
         indexSeperator = salaryRange.find("-")
         lowSalaryRange = salaryRange[:indexSeperator]
         highSalaryRange = salaryRange[indexSeperator+1:]
-        if lowSalaryRange.find("K") == -1:
+        try:
+            if lowSalaryRange.find("K") == -1:
+                return None
+            else:
+                low = lowSalaryRange[1:-1]
+                low = low + "000"
+            if highSalaryRange.find("K") == -1:
+                return None
+            else:
+                high = highSalaryRange[1:highSalaryRange.find("K")]
+                high = high + "000"
+            average = (int(low) + int(high))/2
+            return str(average)
+        except ValueError:
             return None
-        else:
-            low = lowSalaryRange[1:-1]
-            low = low + "000"
-        if highSalaryRange.find("K") == -1:
-            return None
-        else:
-            high = highSalaryRange[1:highSalaryRange.find("K")]
-            high = high + "000"
-        average = (int(low) + int(high))/2
-        return str(average)
 
     def parse(self):
         cred = credentials.Certificate(
