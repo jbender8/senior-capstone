@@ -65,7 +65,7 @@
   font-size: small;
 }
 .page-query{
-  background-color: #303030;
+  background-color: #505050;
   color: white;
   padding: 4vh;
 }
@@ -74,6 +74,17 @@
   padding-top: 3vh;
   padding-left: 3vh;
   padding-right: 3vh;
+  padding-bottom: 3vh;
+}
+#root{
+  background-color: #505050;
+}
+.data{
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+.search{
+  padding-top: 3vh;
   padding-bottom: 3vh;
 }
 

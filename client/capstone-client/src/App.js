@@ -46,17 +46,10 @@ function App() {
   const titlesByAve = analytics.jobTitlesByAveSalary(data);
   
 return(
-    <div>
+    <div className="return">
       <Header />
-      <Grid container spacing={3} alignItems='center' alignContent='center' justify='center'>
-        <Grid item>
-          <Vis1 data={titlesByAve}/>
-        </Grid>
-        <Grid item>
-          <Vis2 data={citiesByFreq}/>
-        </Grid>
-      </Grid>
-
+      
+      <div className="search">
       <Grid container nowrap direction='column' alignContent='center' justify='center' alignItems='center' spacing={3}>
         <Grid item>
           <Search {...{locations, setlocations, setSalary, salary, setSkills, skills, feild, setFeild}}/>
@@ -68,6 +61,17 @@ return(
           
         </Grid>
       </Grid>
+      </div>
+      <div className="return">
+      <Grid container spacing={3} alignItems='center' alignContent='center' justify='center'>
+        <Grid item>
+          <Vis1 data={titlesByAve}/>
+        </Grid>
+        <Grid item>
+          <Vis2 data={citiesByFreq}/>
+        </Grid>
+      </Grid>
+      </div>
       <QueryResults results={data} inputSkills={skills}/>
       <Footer />
     </div>

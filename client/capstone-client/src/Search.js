@@ -15,14 +15,17 @@ import {
     ToggleButton
 } from '@material-ui/lab';
 
-const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, feild, setFeild}) => {
+const Search = ({skills, setSkills, Minsalary,Maxsalary, setMinSalary, setMaxSalary, locations, setlocations, feild, setFeild}) => {
 
     const handlelocations = event => {
         setlocations(event.target.value);
     }
 
-    const handleSalary = event => {
-        setSalary(event.target.value);
+    const handleMinSalary = event => {
+        setMinSalary(event.target.value);
+    }
+    const handleMaxSalary = event => {
+        setMaxSalary(event.target.value);
     }
 
     const handleFeild = event => {
@@ -64,8 +67,12 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
                         <Chips values={availableLocations} label="Locations" value={locations} handleValue={handlelocations} />
                     </Grid>
                     <Grid item>
-                        <InputLabel>Salary</InputLabel>
-                        <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
+                        <InputLabel>Min Salary</InputLabel>
+                        <TextField placeholder='MinSalary' onChange={handleMinSalary}>{Minsalary}</TextField>
+                    </Grid>
+                    <Grid item>
+                        <InputLabel>Max Salary</InputLabel>
+                        <TextField placeholder='MaxSalary' onChange={handleMaxSalary}>{Maxsalary}</TextField>
                     </Grid>
                     <Grid item>
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
