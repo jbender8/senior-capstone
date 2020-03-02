@@ -82,7 +82,7 @@ class DiceScraper():
         '''push scraped data to Firestore'''
         
         docId = str(now) + ' Dice{0:0>4}'.format(self.count)
-        doc = self.fs.document('dice/' + docId)
+        doc = self.fs.document('ScrapedJobs/' + docId)
         doc.create(data)
 
     def scrape(self, link):
