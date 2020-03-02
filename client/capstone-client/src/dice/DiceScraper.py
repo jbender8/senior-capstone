@@ -152,17 +152,17 @@ class DiceScraper():
                 except:
                     pass
         except:
-            return
+            pass
             
         if ( pg.find('input', id = 'estSkillText') != None ):
             sk = pg.find('input', id = 'estSkillText')['value'].split(', ')
-            for i in range(0, len(skills)):
-                sk[i] = sk[i].strip().lower()
-            for skill in sk:
-                if ( skill in targetSkills ):
-                    skills.append(skill)
-            if (len(skills) == 0):
-                return
+            for s in sk:
+                skills.append(s.lower())
+##            for skill in sk:
+##                if ( skill in targetSkills ):
+##                    skills.append(skill)
+##            if (len(skills) == 0):
+##                return
             
         if not sal.isnumeric():
             sal = avg[loc]
