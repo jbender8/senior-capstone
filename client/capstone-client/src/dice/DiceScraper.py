@@ -53,9 +53,12 @@ avg = {
         'houston': '61013'
         }
 
+domains = ['artificial intelligence', 'deep learning', 'machine learning', 'data science']
+
 
 class DiceScraper():
 
+    domain = ''
     cred = credentials.Certificate('seniorcapstone-46b64-firebase-adminsdk-9tth5-1baa5fae82.json')
     fb = firebase_admin.initialize_app(cred)
     fs = firebase_admin.firestore.client(fb)
@@ -68,8 +71,11 @@ class DiceScraper():
         start = datetime.now()
         print("start time: " + str(start.strftime("%d-%m-%Y %H:%M:%S")))
         self.driver = webdriver.Chrome()
+        i = 0
         for q in queries:
+            self.domain = domains[i%4]
             self.findJobs(q)
+            i += 1
         end = datetime.now()
         print("end time: " + str(end.strftime("%d-%m-%Y %H:%M:%S")))
         self.kill()
@@ -82,7 +88,7 @@ class DiceScraper():
         '''push scraped data to Firestore'''
         
         docId = str(now) + ' Dice{0:0>4}'.format(self.count)
-        doc = self.fs.document('ScrapedJobs/' + docId)
+        doc = self.fs.document('diceTest/' + docId)
         doc.create(data)
 
     def scrape(self, link):
@@ -156,25 +162,26 @@ class DiceScraper():
             
         if ( pg.find('input', id = 'estSkillText') != None ):
             sk = pg.find('input', id = 'estSkillText')['value'].split(', ')
-            for s in sk:
-                skills.append(s.lower())
-##            for skill in sk:
-##                if ( skill in targetSkills ):
-##                    skills.append(skill)
-##            if (len(skills) == 0):
-##                return
+##            for s in sk:
+##                skills.append(s.lower())
+            for skill in sk:
+                if ( skill.lower() in targetSkills ):
+                    skills.append(skill.lower())
+            if (len(skills) == 0):
+                skills.append(self.domain)
             
         if not sal.isnumeric():
             sal = avg[loc]
         
         data = {"JobTitle": title,
+                "JobDomain": self.domain,
                 "JobLocation": loc,
                 "JobSalary": sal,
                 "JobSkills": skills,
                 "JobWebsite": "https://www.dice.com/",
                 "JobLink": link}
         self.count += 1
-        ##print(data)
+        ##print(self.domain)
         self.fsPush(data)
 
     def findJobs(self, link):
