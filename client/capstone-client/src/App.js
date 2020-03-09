@@ -10,12 +10,9 @@ import Search from './Search.js';
 import Header from './header';
 import Footer from './footer';
 import {Vis1, Vis2} from './Visualizations.js';
-import {getAllJobs, userQuery, createFakeJobs} from './util/firebase.js';
+import {userQuery, createFakeJobs} from './util/firebase.js';
 import QueryResults from './QueryResults.js';
 import analytics from './util/analytics.js';
-
-
-console.log(getAllJobs());
 
 function App() {
   const [data, setData] = React.useState([]);
