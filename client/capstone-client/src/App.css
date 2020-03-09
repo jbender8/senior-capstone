@@ -27,8 +27,7 @@ html::-webkit-scrollbar { width: 0 !important }
 }
 
 .page-query {
-  background-color: #505050;
-  color: white;
+  background-color: #dfdfdf;
   padding: 4vh;
 }
 

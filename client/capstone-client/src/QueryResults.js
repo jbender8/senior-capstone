@@ -6,15 +6,15 @@ import {
     Typography,
     CardActions,
     Button,
-    Grid
+    Grid,
+    Box
 } from '@material-ui/core';
 
-var inputSkillsList;
-
-const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
+const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) => {
     return (
         <Grid item>
             <Container maxWidth='md'>
+
                 <Card>
                     <CardContent>
                         <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
@@ -52,13 +52,14 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
                                 <Typography variant='body1' component='h2'>Skills:</Typography>
                             </Grid>
                             <Grid item>
-                                <JobSkill results={JobSkills}>
-                                </JobSkill> 
+                                <Grid container spacing={1}>
+                                    <JobSkill skillsInJob={JobSkills} skills={skills}/>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button size='small'>
+                        <Button size='small' href={JobLink}>
                             Link to Job
                         </Button>
                     </CardActions>
@@ -69,39 +70,34 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills}) => {
 }
 
 
-const JobSkill = ({results}) => {
-    console.log(inputSkillsList);
-    if(results.length === 0) return null;
-        return (results.map((result, i) => {
-            if(inputSkillsList.includes(result))
-                return (<Typography variant='h5' style={{color : 'green'}} component='h2' {...result} key={i}>{result}</Typography>)
-            return (<Typography variant='h5' style={{color : 'red'}} component='h2' {...result} key={i}>{result}</Typography>)
-        }));
+const JobSkill = ({skillsInJob, skills}) => {
+    return skillsInJob.map((result, i) => {
+        let color = 'red';
+        if(skills.includes(result)) color = 'green';
+        return (
+            <Grid item>
+                <Typography
+                    {...result}
+                    variant='h5'
+                    style={{color : color}}
+                    component='h2' 
+                    key={i}>
+                    {result}
+               </Typography>
+            </Grid>
+        );
+    });
 }
 
-// const ColoredCard = ({results}) => {
-//     console.log(inputSkillsList);
-//     if(results.length === 0) return null;
-//         return (results.map((result, i) => {
-//             if(inputSkillsList.includes(result))
-//                 return (<Typography variant='h5' style={{color : 'green'}} component='h2' {...result} key={i}>{result}</Typography>)
-//             return (<Typography variant='h5' style={{color : 'red'}} component='h2' {...result} key={i}>{result}</Typography>)
-//         }));
-// }
 
-
-const QueryResults = ({results, inputSkills}) => {
-    console.log(inputSkills);
-    inputSkillsList = inputSkills.map((item) => {
-        return item.toLowerCase();
-    });
-
+const QueryResults = ({results, skills}) => {
     if(results.length === 0) return null;
+    skills = skills.map((item) => item.toLowerCase());
     return (
         <Container maxWidth='lg'>
             <div className="page-query">
-            <Grid container spacing={2} direction='column'>
-                {results.map((result, i) => <Result {...result} key={i}/>)}
+            <Grid container spacing={4} direction='column'>
+                {results.map((result, i) => <Result skills={skills} {...result} key={i}/>)}
             </Grid>
             </div>
         </Container>

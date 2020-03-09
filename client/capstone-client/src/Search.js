@@ -11,19 +11,17 @@ import {
 }
 from '@material-ui/core';
 
-const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, field, setField}) => {
-
+const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, fields, setFields}) => {
     const handlelocations = event => {
         setlocations(event.target.value);
     }
 
     const handleSalary = event => {
-        console.log(event.target.value);
         setSalary(event.target.value);
     }
 
     const handleField = event => {
-        setField(event.target.value);
+        setFields(event.target.value);
     }
 
     const handleSkills = (event) => {
@@ -39,7 +37,6 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
                     value={value}
                     onChange={handleValue}
                     input={<Input/>}
-
                 >
                     {values.map(v => {
                         return <MenuItem key={v} value={v}>{v}</MenuItem>
@@ -67,7 +64,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                     </Grid>
                     <Grid item>
-                        <Chips values={availableFields} label="Fields" value={field} handleValue={handleField} />
+                        <Chips values={availableFields} label="fields" value={fields} handleValue={handleField} />
                     </Grid>
                 </Grid>
             </Container>
