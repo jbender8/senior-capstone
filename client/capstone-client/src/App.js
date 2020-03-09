@@ -68,7 +68,7 @@ return(
       </Grid>
       </div>
       <QueryResults results={data} skills={skills}/>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

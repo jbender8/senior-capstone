@@ -14,8 +14,7 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) 
     return (
         <Grid item>
             <Container maxWidth='md'>
-
-                <Card>
+                <Card raised>
                     <CardContent>
                         <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
                             <Grid item>
@@ -59,7 +58,7 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) 
                         </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button size='small' href={JobLink}>
+                        <Button variant='contained' color="primary" size='small' href={JobLink}>
                             Link to Job
                         </Button>
                     </CardActions>
