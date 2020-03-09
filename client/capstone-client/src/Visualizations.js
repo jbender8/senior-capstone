@@ -27,7 +27,8 @@ export const Vis2 = ({data}) => {
             data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
           }
           </Pie>
-        <Legend />
+          <Tooltip />
+          <Legend />
         </PieChart>
       );
 }

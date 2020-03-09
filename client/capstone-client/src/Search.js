@@ -10,26 +10,20 @@ import {
     Box
 }
 from '@material-ui/core';
-import {
-    ToggleButtonGroup,
-    ToggleButton
-} from '@material-ui/lab';
 
-const Search = ({skills, setSkills, Minsalary,Maxsalary, setMinSalary, setMaxSalary, locations, setlocations, feild, setFeild}) => {
+const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, field, setField}) => {
 
     const handlelocations = event => {
         setlocations(event.target.value);
     }
 
-    const handleMinSalary = event => {
-        setMinSalary(event.target.value);
-    }
-    const handleMaxSalary = event => {
-        setMaxSalary(event.target.value);
+    const handleSalary = event => {
+        console.log(event.target.value);
+        setSalary(event.target.value);
     }
 
-    const handleFeild = event => {
-        setFeild(event.target.value);
+    const handleField = event => {
+        setField(event.target.value);
     }
 
     const handleSkills = (event) => {
@@ -57,33 +51,27 @@ const Search = ({skills, setSkills, Minsalary,Maxsalary, setMinSalary, setMaxSal
 
     const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'Spark', 'Java', 'SAS', 'Tableau', 'Hive', 'Scala', 'AWS', 'C++', 'MATLAB', 'TensorFlow', 'C', 'Excel', 'NoSQL', 'Linux', 'Azure', 'sclkit-learn', 'SPSS', 'Pandas', 'JavaScript', 'Perl', 'C#', 'NumPy', 'Keras', 'Git', 'Docker', 'MySQL', 'HBase', 'MongoDB', 'Cassandra', 'PyTorch', 'D3', 'Caffe'];
     const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
-    const availableFeilds = ['Artificial Intelligence', 'Deep Learning', 'Machine Learning', 'Data Science'];
+    const availableFields = ['Artificial Intelligence', 'Deep Learning', 'Machine Learning', 'Data Science'];
     return (
-        <div className="page-serch">
-        <Box borderTop={0.5} marginTop={1} paddingTop={2}>
+        <Box borderTop={0.5} marginTop={1} paddingTop={2} bgcolor="#fff">
             <Container maxWidth='xl' align='center'>
                 <Grid container alignItems='flex-end' justify='center' spacing={2}>
                     <Grid item>
                         <Chips values={availableLocations} label="Locations" value={locations} handleValue={handlelocations} />
                     </Grid>
                     <Grid item>
-                        <InputLabel>Min Salary</InputLabel>
-                        <TextField placeholder='MinSalary' onChange={handleMinSalary}>{Minsalary}</TextField>
-                    </Grid>
-                    <Grid item>
-                        <InputLabel>Max Salary</InputLabel>
-                        <TextField placeholder='MaxSalary' onChange={handleMaxSalary}>{Maxsalary}</TextField>
+                        <InputLabel>Salary</InputLabel>
+                        <TextField placeholder='low-high' onChange={handleSalary}>{salary}</TextField>
                     </Grid>
                     <Grid item>
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                     </Grid>
                     <Grid item>
-                        <Chips values={availableFeilds} label="Fields" value={feild} handleValue={handleFeild} />
+                        <Chips values={availableFields} label="Fields" value={field} handleValue={handleField} />
                     </Grid>
                 </Grid>
             </Container>
         </Box>
-        </div>
     );
 }
 

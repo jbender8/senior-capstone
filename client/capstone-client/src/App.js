@@ -14,7 +14,7 @@ import {getAllJobs, userQuery, createFakeJobs} from './util/firebase.js';
 import QueryResults from './QueryResults.js';
 import analytics from './util/analytics.js';
 
-// createFakeJobs(20);
+
 console.log(getAllJobs());
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const [locations, setlocations] = React.useState(['Chicago', 'New York City']);
   const [salary, setSalary] = React.useState("75000");
   const [skills, setSkills] = React.useState(['Python']);
-  const [feild, setFeild] = React.useState(["Artificial Intelligence"]);
+  const [field, setField] = React.useState(["Artificial Intelligence"]);
 
 
   const submitQuery = () => {
@@ -36,12 +36,6 @@ function App() {
     });
   }
 
-
-  // const cities = [
-  //   { name: 'Chicago', value: 178 }, { name: 'Houston', value: 129 },
-  //   { name: 'New York City', value: 203 }, { name: 'San Francisco', value: 247 },
-  // ];
-
   const citiesByFreq = analytics.citiesByFreq(data);
   const titlesByAve = analytics.jobTitlesByAveSalary(data);
   
@@ -52,7 +46,7 @@ return(
       <div className="search">
       <Grid container nowrap direction='column' alignContent='center' justify='center' alignItems='center' spacing={3}>
         <Grid item>
-          <Search {...{locations, setlocations, setSalary, salary, setSkills, skills, feild, setFeild}}/>
+          <Search {...{locations, setlocations, setSalary, salary, setSkills, skills, field, setField}}/>
         </Grid>
         <Grid item>
           <Button variant='contained' color='primary' onClick={submitQuery}>Submit</Button>

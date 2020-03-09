@@ -46,7 +46,7 @@ const contains = (a, b) => {
   return false;
 }
 
-export const userQuery = ({salary, skills, locations, data, setData}) => {
+export const userQuery = ({salary, skills, locations, setData}) => {
   skills = skills.map(skill => skill.toLowerCase());
   locations = locations.map(l => l.toLowerCase());
   db.collection(DB_NAME)
