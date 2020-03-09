@@ -7,8 +7,21 @@ import {
     CardActions,
     Button,
     Grid,
-    Box
+    createMuiTheme,
 } from '@material-ui/core';
+import {
+    withStyles,
+    ThemeProvider,
+} from '@material-ui/styles';
+import {green, red, blue} from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: blue,
+        secondary: red,
+        success: green
+    }
+});
 
 const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) => {
     return (
@@ -16,37 +29,37 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) 
             <Container maxWidth='md'>
                 <Card raised>
                     <CardContent>
-                        <Grid container spacing={2} alignItems='center' alignContent='flex-end'>
+                        <Grid container spacing={1} alignItems='center' alignContent='flex-end'>
                             <Grid item>
                                 <Typography variant='body1' component='h2'>Title:</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='h5' component='h2'>
+                                <Typography variant='h6' component='h2'>
                                     {JobTitle}
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid container alignItems='center' spacing={2}>
+                        <Grid container alignItems='center' spacing={1}>
                             <Grid item>
                                 <Typography variant='body1' component='h2'>Location:</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='h5' component='h2'>
-                                    {JobLocation}
+                                <Typography variant='h6' component='h2'>
+                                    {JobLocation.charAt(0).toUpperCase() + JobLocation.substring(1)}
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid container alignItems='center' spacing={2}>
+                        <Grid container alignItems='center' spacing={1}>
                             <Grid item>
                                 <Typography variant='body1' component='h2'>Salary:</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='h5' component='h2'>
+                                <Typography variant='h6' component='h2'>
                                     {JobSalary + "$"}
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid container alignItems='center' spacing={2}>
+                        <Grid container alignItems='center' spacing={1}>
                             <Grid item>
                                 <Typography variant='body1' component='h2'>Skills:</Typography>
                             </Grid>
@@ -58,7 +71,7 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) 
                         </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button variant='contained' color="primary" size='small' href={JobLink}>
+                        <Button variant='contained' color='primary' size='small' href={JobLink}>
                             Link to Job
                         </Button>
                     </CardActions>
@@ -70,19 +83,23 @@ const Result = ({JobSalary, JobLocation, JobTitle, JobSkills, skills, JobLink}) 
 
 
 const JobSkill = ({skillsInJob, skills}) => {
-    return skillsInJob.map((result, i) => {
-        let color = 'red';
-        if(skills.includes(result)) color = 'green';
+    return skillsInJob.map((skill, i) => {
+        let color = 'secondary';
+        if(skills.includes(skill)) color = 'primary';
         return (
             <Grid item>
-                <Typography
-                    {...result}
+                {/* <Typography
                     variant='h5'
                     style={{color : color}}
-                    component='h2' 
+                    component='h2'
                     key={i}>
-                    {result}
-               </Typography>
+                    {skill}
+               </Typography> */}
+               <ThemeProvider theme={theme}>
+                    <Button variant='outlined' styles={{color: 'black'}} color={color} size='small'>
+                        {skill}
+                    </Button>
+               </ThemeProvider>
             </Grid>
         );
     });

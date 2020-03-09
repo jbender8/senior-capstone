@@ -64,7 +64,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
                         <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
                     </Grid>
                     <Grid item>
-                        <Chips values={availableFields} label="fields" value={fields} handleValue={handleField} />
+                        <Chips values={availableFields} label="Fields" value={fields} handleValue={handleField} />
                     </Grid>
                 </Grid>
             </Container>
