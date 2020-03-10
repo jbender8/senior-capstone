@@ -124,14 +124,6 @@ class DiceScraper():
                 loc = 'seattle'
             elif loc[-2:] == 'tx':
                 loc = 'houston'
-##            cf = False
-##            for c in cities:
-##                if (c in loc):
-##                    cf = True
-##                    loc = c
-##                    break
-##            if (cf == False):
-##                return
 
         try:
             s = pg.find('span', class_ = 'icon-bank-note icons')
@@ -162,8 +154,6 @@ class DiceScraper():
             
         if ( pg.find('input', id = 'estSkillText') != None ):
             sk = pg.find('input', id = 'estSkillText')['value'].split(', ')
-##            for s in sk:
-##                skills.append(s.lower())
             for skill in sk:
                 if ( skill.lower() in targetSkills ):
                     skills.append(skill.lower())
@@ -177,11 +167,10 @@ class DiceScraper():
                 "JobDomain": self.domain,
                 "JobLocation": loc,
                 "JobSalary": sal,
-                "JobSkills": skills,
+                "JobSkills": self.toSet(skills),
                 "JobWebsite": "https://www.dice.com/",
                 "JobLink": link}
         self.count += 1
-        ##print(self.domain)
         self.fsPush(data)
 
     def findJobs(self, link):
@@ -199,7 +188,6 @@ class DiceScraper():
         xEnd = ']/div/div[1]/div/div[2]/div[1]/h5/a'
 
         for x in range (0, pgs):
-            ##print("page " + str(x + 1))
             for i in range (1, 21):
                 try:
                     j = self.driver.find_element_by_xpath(xStart + str(i) + xEnd).get_attribute('href')
@@ -215,7 +203,15 @@ class DiceScraper():
             
 
     def kill(self):
+        '''Close the Selenium driver'''
         self.driver.close()
+
+    def toSet(self, l):
+        '''Convert a list to a set, returning a list'''
+        ret = []
+        for i in set(l):
+            ret.append(i)
+        return ret
 
 ds = DiceScraper()
 
