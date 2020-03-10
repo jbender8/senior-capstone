@@ -51,7 +51,7 @@ class GlassdoorScraper:
                           "matlab", "tensorflow", "c", "excel", "nossql", "linux", "azure", "sclkit-learn", "spss", "pandas", "javascript", "perl",
                           "c#", "numpy", "keras", "git", "docker", "mysql", "hbase", "mongodb", "cassandra", "pytorch", "d3", "caffe"]
 
-    def parseHelper(self, link, db, city):
+    def parseHelper(self, link, db, city, JobDomain):
         # Parse Glassdoor
         global countOfJobs
         pageIndex = 0
@@ -104,6 +104,7 @@ class GlassdoorScraper:
                     # Add to Firebase database
                     documentName = "Glassdoor"+str(countOfJobs)
                     jobData = {
+                        u'JobDomain': JobDomain,
                         u'JobLink': JobLink,
                         u'JobLocation': JobLocation,
                         u'JobSalary': JobSalary,
@@ -112,7 +113,7 @@ class GlassdoorScraper:
                         u'JobWebsite': JobWebsite
 
                     }
-                    db.collection(u'Glassdoor').document(
+                    db.collection(u'ScrapedJobs').document(
                         documentName).set(jobData)
                     countOfJobs = countOfJobs+1
             pageIndex = pageIndex+1
@@ -160,24 +161,50 @@ class GlassdoorScraper:
             "/Users/shashanksrikanth/Downloads/ServiceKey.json")
         app = firebase_admin.initialize_app(cred)
         db = firestore.client()
-        for link in self.links_chicago:
-            self.parseHelper(link, db, "Chicago")
-        print("Finished parsing for Chicago. Starting on San Francisco...")
-        for link in self.links_sanFrancisco:
-            self.parseHelper(link, db, "San Francisco")
-        print("Finished parsing for San Francisco. Starting on New York City...")
-        for link in self.links_newYorkCity:
-            self.parseHelper(link, db, "New York City")
-        print("Finished parsing for New York City. Starting on Seattle...")
-        for link in self.links_seattle:
-            self.parseHelper(link, db, "Seattle")
-        print("Finished parsing for Seattle. Starting on Houston...")
-        for link in self.links_houston:
-            self.parseHelper(link, db, "Houston")
-        print("Finished parsing for Houston.")
-        print("Scraping complete.")
+        '''
+        print("Scraping Chicago...")
+        self.parseHelper(
+            self.links_chicago[0], db, "chicago", "artificial intelligence")
+        self.parseHelper(self.links_chicago[1], db, "chicago", "deep learning")
+        self.parseHelper(
+            self.links_chicago[2], db, "chicago", "machine learning")
+        self.parseHelper(self.links_chicago[3], db, "chicago", "data science")
+        print("Scraping San Francisco...")
+        self.parseHelper(
+            self.links_sanFrancisco[0], db, "san francisco", "artificial intelligence")
+        self.parseHelper(
+            self.links_sanFrancisco[1], db, "san francisco", "deep learning")
+        '''
+        self.parseHelper(
+            self.links_sanFrancisco[2], db, "san francisco", "machine learning")
+        self.parseHelper(
+            self.links_sanFrancisco[3], db, "san francisco", "data science")
+        print("Scraping New York City...")
+        self.parseHelper(
+            self.links_newYorkCity[0], db, "new york", "artificial intelligence")
+        self.parseHelper(
+            self.links_newYorkCity[1], db, "new york", "deep learning")
+        self.parseHelper(
+            self.links_newYorkCity[2], db, "new york", "machine learning")
+        self.parseHelper(
+            self.links_newYorkCity[3], db, "new york", "data science")
+        print("Scraping Seattle...")
+        self.parseHelper(
+            self.links_seattle[0], db, "seattle", "artificial intelligence")
+        self.parseHelper(self.links_seattle[1], db, "seattle", "deep learning")
+        self.parseHelper(
+            self.links_seattle[2], db, "seattle", "machine learning")
+        self.parseHelper(self.links_seattle[3], db, "seattle", "data science")
+        print("Scraping Houston...")
+        self.parseHelper(
+            self.links_houston[0], db, "houston", "artificial intelligence")
+        self.parseHelper(self.links_houston[1], db, "houston", "deep learning")
+        self.parseHelper(
+            self.links_houston[2], db, "houston", "machine learning")
+        self.parseHelper(self.links_houston[3], db, "houston", "data science")
+        print("Scraping Finished!")
 
 
-countOfJobs = 0
+countOfJobs = 176
 scraper = GlassdoorScraper()
 scraper.parse()
