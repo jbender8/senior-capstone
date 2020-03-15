@@ -13,7 +13,7 @@ for city in cities:
     for desc in job_desc:
         for i in range(0, 51, 10):
             template = "https://www.indeed.com/jobs?q={}&l={}&radius=50&start={}"
-            urllist.append([template.format(desc, city, i), desc.replace('+', ' ')])
+            urllist.append([template.format(desc, city, i), desc.replace('+', ' '), city[:-6].replace('+', ' ')])
 
 #connect to firebase. the json file should be replaced by a json in the directory if you do not have this
 cred = credentials.Certificate('seniorcapstone-46b64-firebase-adminsdk-9tth5-4bf505d030.json')
@@ -35,7 +35,7 @@ def getskills(url):
                 jobskills.append(skill)
     return jobskills
 
-#url is a list of [url, job_desc]
+#url is a list of [url, job_desc, city]
 for url in urllist:
     page = requests.get(url[0])
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -58,10 +58,10 @@ for url in urllist:
             jtitle = j.find('span', class_="title")
         else:
             jtitle = j.find('a', class_="jobtitle turnstileLink")
-        if j.find('div', class_="location accessible-contrast-color-location") != None:
-            jlocation = j.find('div', class_="location accessible-contrast-color-location")
-        else:
-            jlocation = j.find('span', class_="location accessible-contrast-color-location")
+##        if j.find('div', class_="location accessible-contrast-color-location") != None:
+##            jlocation = j.find('div', class_="location accessible-contrast-color-location")
+##        else:
+##            jlocation = j.find('span', class_="location accessible-contrast-color-location")
         if j.find('div', class_="salaryText") != None:
             jsalary = j.find('div', class_="salaryText")
         else:
@@ -69,7 +69,7 @@ for url in urllist:
         #create a dictionary to add data to the document
         data = {"JobDomain": url[1],
                 "JobLink": jlink,
-                "JobLocation": jlocation.text.strip(),
+                "JobLocation": url[2].lower(),
                 "JobSalary": "",
                 "JobSkills": jskills,
                 "JobTitle": jtitle.text.strip(),
