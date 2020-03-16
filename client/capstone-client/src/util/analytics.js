@@ -24,9 +24,8 @@ analytics.jobTitlesByAveSalary = data => {
     const titles = {};
     const titleObjects = [];
     for(const job of data) {
-        const title = job.JobTitle;
+        const title = job.JobDomain;
         if(title in titles) {
-            console.log(job.JobSalary)
             titles[title].push(job.JobSalary);
         } else {
             titles[title] = [job.JobSalary];

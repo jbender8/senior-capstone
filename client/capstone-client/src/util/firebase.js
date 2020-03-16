@@ -71,6 +71,7 @@ export const userQuery = ({salary, skills, locations, setData, fields}) => {
   .get()
   .then(qs => qs.forEach(doc => {
     const job = doc.data();
+    console.log(job);
     if(contains(skills, job.JobSkills) && fields.indexOf(job.JobDomain) !== -1) {
       setData(prev => [...prev, job]);
     }
