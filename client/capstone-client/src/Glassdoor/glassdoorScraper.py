@@ -59,7 +59,7 @@ class GlassdoorScraper:
         driver.get(link)
 
         # Bypass sign-in notification
-        while(pageIndex < 2):
+        while(pageIndex < 1):
             try:
                 driver.find_element_by_class_name("selected").click()
             except ElementClickInterceptedException:
@@ -79,8 +79,7 @@ class GlassdoorScraper:
                 infoCollected = False
                 while not infoCollected:
                     try:
-                        JobLocation = driver.find_element_by_xpath(
-                            './/div[@class="location"]').text
+                        JobLocation = city
                         JobTitle = driver.find_element_by_xpath(
                             './/div[contains(@class, "title")]').text
                         JobWebsite = "Glassdoor"
@@ -161,7 +160,6 @@ class GlassdoorScraper:
             "/Users/shashanksrikanth/Downloads/ServiceKey.json")
         app = firebase_admin.initialize_app(cred)
         db = firestore.client()
-        '''
         print("Scraping Chicago...")
         self.parseHelper(
             self.links_chicago[0], db, "chicago", "artificial intelligence")
@@ -174,7 +172,6 @@ class GlassdoorScraper:
             self.links_sanFrancisco[0], db, "san francisco", "artificial intelligence")
         self.parseHelper(
             self.links_sanFrancisco[1], db, "san francisco", "deep learning")
-        '''
         self.parseHelper(
             self.links_sanFrancisco[2], db, "san francisco", "machine learning")
         self.parseHelper(
@@ -205,6 +202,6 @@ class GlassdoorScraper:
         print("Scraping Finished!")
 
 
-countOfJobs = 176
+countOfJobs = 0
 scraper = GlassdoorScraper()
 scraper.parse()
