@@ -50,7 +50,7 @@ const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, 
     const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
     const availableFields = ['Artificial Intelligence', 'Deep Learning', 'Machine Learning', 'Data Science'];
     return (
-        <Box borderTop={0.5} marginTop={1} paddingTop={2} bgcolor="#fff">
+        <Box borderTop={0.5} marginTop={1} paddingTop={2} bgcolor="#C0C0C0">
             <Container maxWidth='xl' align='center'>
                 <Grid container alignItems='flex-end' justify='center' spacing={2}>
                     <Grid item>
