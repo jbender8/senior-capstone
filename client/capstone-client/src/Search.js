@@ -6,85 +6,69 @@ import {
     InputLabel,
     TextField,
     Grid,
+    Input,
+    Box
 }
 from '@material-ui/core';
-import {
-    ToggleButtonGroup,
-    ToggleButton
-} from '@material-ui/lab';
 
-const Search = () => {
-    const [location, setLocation] = React.useState('Chicago');
-    const [salary, setSalary] = React.useState("75000");
-    const [skills, setSkills] = React.useState(() => []);
-    const [level, setLevel] = React.useState("Junior");
-
-    const handleLocation = event => {
-        setLocation(event.target.value);
+const Search = ({skills, setSkills, salary, setSalary, locations, setlocations, fields, setFields}) => {
+    const handlelocations = event => {
+        setlocations(event.target.value);
     }
 
     const handleSalary = event => {
         setSalary(event.target.value);
     }
 
-    const handleLevel = event => {
-        setLevel(event.target.value);
+    const handleField = event => {
+        setFields(event.target.value);
     }
 
-    const handleSkills = (event, newSkill) => {
-        setSkills(newSkill);
+    const handleSkills = (event) => {
+        setSkills(event.target.value);
     }
 
-    const availableSkills = ['Data Science', 'Machine Learning', 'R', 'Python'];
-    const locations = ['Chicago', 'San Francisco', 'New York City'];
-    const levels = ['Junior', 'Senior', 'Principal', 'Staff'];
+    const Chips = ({values, value, handleValue, label}) => {
+        return (
+            <React.Fragment>
+                <InputLabel>{label}</InputLabel>
+                <Select
+                    multiple
+                    value={value}
+                    onChange={handleValue}
+                    input={<Input/>}
+                >
+                    {values.map(v => {
+                        return <MenuItem key={v} value={v}>{v}</MenuItem>
+                    })}
+                </Select>
+            </React.Fragment>
+        );
+    }
+
+    const availableSkills = ['Python', 'SQL', 'R', 'Hadoop', 'Spark', 'Java', 'SAS', 'Tableau', 'Hive', 'Scala', 'AWS', 'C++', 'MATLAB', 'TensorFlow', 'C', 'Excel', 'NoSQL', 'Linux', 'Azure', 'sclkit-learn', 'SPSS', 'Pandas', 'JavaScript', 'Perl', 'C#', 'NumPy', 'Keras', 'Git', 'Docker', 'MySQL', 'HBase', 'MongoDB', 'Cassandra', 'PyTorch', 'D3', 'Caffe'];
+    const availableLocations = ['Chicago', 'San Francisco', 'New York City', 'Seattle', 'Houston'];
+    const availableFields = ['Artificial Intelligence', 'Deep Learning', 'Machine Learning', 'Data Science'];
     return (
-        <Container maxWidth='xl' align='center'>
-            <Grid container alignItems='flex-end' justify='center' spacing={2}>
-                <Grid item>
-                    <InputLabel>Location</InputLabel>
-                    <Select
-                        value={location}
-                        onChange={handleLocation}
-                    >
-                        <MenuItem value={locations[0]}>{locations[0]}</MenuItem>
-                        <MenuItem value={locations[1]}>{locations[1]}</MenuItem>
-                        <MenuItem value={locations[2]}>{locations[2]}</MenuItem>
-                    </Select>
+        <Box borderTop={0.5} marginTop={1} paddingTop={2} bgcolor="#fff">
+            <Container maxWidth='xl' align='center'>
+                <Grid container alignItems='flex-end' justify='center' spacing={2}>
+                    <Grid item>
+                        <Chips values={availableLocations} label="Locations" value={locations} handleValue={handlelocations} />
+                    </Grid>
+                    <Grid item>
+                        <InputLabel>Salary</InputLabel>
+                        <TextField placeholder='low-high' onChange={handleSalary}>{salary}</TextField>
+                    </Grid>
+                    <Grid item>
+                        <Chips values={availableSkills} label="Skills" value={skills} handleValue={handleSkills}/>
+                    </Grid>
+                    <Grid item>
+                        <Chips values={availableFields} label="Fields" value={fields} handleValue={handleField} />
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <InputLabel>Level</InputLabel>
-                    <Select
-                        value={level}
-                        onChange={handleLevel}
-                    >
-                        <MenuItem value={levels[0]}>{levels[0]}</MenuItem>
-                        <MenuItem value={levels[1]}>{levels[1]}</MenuItem>
-                        <MenuItem value={levels[2]}>{levels[2]}</MenuItem>
-                        <MenuItem value={levels[3]}>{levels[3]}</MenuItem>
-                    </Select>
-                </Grid>
-                <Grid item>
-                    <TextField placeholder='Salary' onChange={handleSalary}>{salary}</TextField>
-                </Grid>
-                <Grid item>
-                    <ToggleButtonGroup value={skills} onChange={handleSkills}>
-                        <ToggleButton value={availableSkills[0]}>
-                            {availableSkills[0]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[1]}>
-                            {availableSkills[1]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[2]}>
-                            {availableSkills[2]}
-                        </ToggleButton>
-                        <ToggleButton value={availableSkills[3]}>
-                            {availableSkills[3]}
-                        </ToggleButton>
-                    </ToggleButtonGroup>
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </Box>
     );
 }
 
